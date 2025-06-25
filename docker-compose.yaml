@@ -1,0 +1,29 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: hiresmart
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: test
+    ports:
+      - "5432:5432"
+  
+  adminer:
+    image: adminer
+    restart: always
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+    ports:
+      - "4500:8080"
+
+  web:
+    build: .
+    depends_on:
+      - db
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8080:80"
+      - "443:443"
