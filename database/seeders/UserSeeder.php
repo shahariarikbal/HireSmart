@@ -21,15 +21,41 @@ class UserSeeder extends Seeder
                 'role' => 'admin',
             ],
             [
-                'name' => 'Employer',
-                'email' => 'employer@hiresmart.com',
+                'name' => 'Employer one',
+                'email' => 'employer.one@hiresmart.com',
                 'role' => 'employer',
             ],
             [
-                'name' => 'Candidate',
-                'email' => 'candidate@hiresmart.com',
+                'name' => 'Employer two',
+                'email' => 'employer.two@hiresmart.com',
+                'role' => 'employer',
+            ],
+            [
+                'name' => 'Employer three',
+                'email' => 'employer.three@hiresmart.com',
+                'role' => 'employer',
+            ],
+            [
+                'name' => 'Candidate one',
+                'email' => 'candidate.one@hiresmart.com',
                 'role' => 'candidate',
             ],
+            [
+                'name' => 'Candidate two',
+                'email' => 'candidate.two@hiresmart.com',
+                'role' => 'candidate',
+            ],
+            [
+                'name' => 'Candidate three',
+                'email' => 'candidate.three@hiresmart.com',
+                'role' => 'candidate',
+            ],
+            [
+                'name' => 'Candidate four',
+                'email' => 'candidate.four@hiresmart.com',
+                'role' => 'candidate',
+            ],
+
         ];
 
         foreach ($users as $user) {
