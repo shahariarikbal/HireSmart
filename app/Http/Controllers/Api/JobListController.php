@@ -24,6 +24,12 @@ class JobListController extends Controller
         return response()->json($job_lists, 200);
     }
 
+    public function jobApplications($id)
+    {
+        $job_applications = $this->jobService->getJobApplications($id);
+        return response()->json($job_applications, 200);
+    }
+
     public function storeJob(JobStoreRequest $request)
     {
         $data = $request->validated();

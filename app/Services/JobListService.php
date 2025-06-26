@@ -23,6 +23,11 @@ class JobListService
         return $this->jobListRepository->getJobList();
     }
 
+    public function getJobApplications($id)
+    {
+        return $this->jobListRepository->getJobApplications($id);
+    }
+
     public function store($data)
     {
         return $this->jobListRepository->store($data);

@@ -20,6 +20,15 @@ class JobListRepository
         return $job_lists = JobList::with('user')->authUser()->latest()->get();
     }
 
+    public function getJobApplications($id)
+    {
+        return JobList::with('applications')
+        ->where('id', $id)
+        ->where('user_id', JWTAuth::user()->id)
+        ->latest()
+        ->get();
+    }
+
     public function store($data)
     {
         try {
