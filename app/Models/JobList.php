@@ -25,4 +25,17 @@ class JobList extends Model
         'salary_min',
         'salary_max',
     ];
+
+
+    public function scopeAuthUser($query)
+    {
+        $auth_user_id = auth()->id();
+        return $query->where('user_id', $auth_user_id);
+    }
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }
