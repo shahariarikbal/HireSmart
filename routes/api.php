@@ -21,6 +21,7 @@ Route::prefix('v1')->group(function (){
             Route::post('/store', [JobListController::class, 'storeJob']);
             Route::put('/update/{id}', [JobListController::class, 'updateJob']);
             Route::get('/show/{id}', [JobListController::class, 'showJob']);
+            Route::get('/applications/{id}', [JobListController::class, 'jobApplications']);
             Route::delete('/delete/{id}', [JobListController::class, 'deleteJob']);
         });
         
