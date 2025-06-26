@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('job_lists', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->comment('employer_id');
-            $table->string('title');
+            $table->string('title')->index();
             $table->string('image')->nullable()->comment('job listing image');
             $table->text('description');
-            $table->string('location');
+            $table->string('location')->index();
             $table->enum('job_type', ['full_time', 'remote', 'part_time', 'contract', 'temporary', 'internship'])->default('full_time');
             $table->enum('experience_level', ['entry_level', 'mid_level', 'senior_level', 'executive'])->default('entry_level');
             $table->integer('salary_min')->nullable();
