@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ApplicationController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\JobListController;
 use Illuminate\Support\Facades\Route;
@@ -23,7 +24,12 @@ Route::prefix('v1')->group(function (){
             Route::delete('/delete/{id}', [JobListController::class, 'deleteJob']);
         });
         
-
+        // Candidate application routes
+        Route::prefix('/job')->middleware('role:candidate')->group(function (){
+            Route::get('/list', [ApplicationController::class, 'getAllJobList']);
+            Route::get('/filtering', [ApplicationController::class, 'jobFiltering']);
+            Route::post('/apply/{id}', [ApplicationController::class, 'jobApply'])->middleware('throttle:5,1');
+        });
         
     });
 });

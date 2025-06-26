@@ -33,9 +33,19 @@ class JobList extends Model
         return $query->where('user_id', $auth_user_id);
     }
 
+    public function scopeIsActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
+
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class, 'job_list_id', 'id');
     }
 }
