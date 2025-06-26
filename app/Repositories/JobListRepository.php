@@ -28,7 +28,7 @@ class JobListRepository
             'job_type' => $data['job_type'],
             'experience_level' => $data['experience_level'],
             'is_active' => $data['is_active'],
-            'avatar' => $this->imageService->uploadImage($data['avatar'], 'images/joblist'),
+            'image' => $this->imageService->uploadImage($data['image'], 'images/joblist'),
             'user_id' => JWTAuth::user()->id,
             'description' => $data['description'],
             'location' => $data['location'],
@@ -51,10 +51,10 @@ class JobListRepository
         try {
             $job_list = JobList::findOrFail($id);
 
-            $avatar = $this->imageService->updateImage(
-                $data['avatar'] ?? null,
+            $image = $this->imageService->updateImage(
+                $data['image'] ?? null,
                 'images/joblist',
-                $job_list->avatar
+                $job_list->image
             );
 
             $job_list->update([
@@ -62,7 +62,7 @@ class JobListRepository
                 'job_type' => $data['job_type'],
                 'experience_level' => $data['experience_level'],
                 'is_active' => $data['is_active'],
-                'avatar' => $avatar,
+                'image' => $image,
                 'user_id' => JWTAuth::user()->id,
                 'description' => $data['description'],
                 'location' => $data['location'],

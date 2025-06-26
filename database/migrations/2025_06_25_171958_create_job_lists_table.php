@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->comment('employer_id');
             $table->string('title');
-            $table->string('avatar')->nullable()->comment('job listing image');
+            $table->string('image')->nullable()->comment('job listing image');
             $table->text('description');
             $table->string('location');
             $table->enum('job_type', ['full_time', 'remote', 'part_time', 'contract', 'temporary', 'internship'])->default('full_time');

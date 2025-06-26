@@ -27,7 +27,7 @@ class JobListFactory extends Factory
             'salary_max' => fake()->numberBetween(100000, 200000),
             'is_active' => fake()->boolean(80), // 80% chance of being true
             'user_id' => User::where('role', 'employer')->inRandomOrder()->value('id'),
-            'avatar' => fake()->imageUrl(640, 480, 'business', true, 'Job Listing', false) // Generates a placeholder image URL
+            'image' => fake()->imageUrl(640, 480, 'business', true, 'Job Listing', false) // Generates a placeholder image URL
         ];
     }
 }
