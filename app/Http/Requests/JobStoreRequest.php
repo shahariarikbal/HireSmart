@@ -26,7 +26,7 @@ class JobStoreRequest extends FormRequest
             'job_type' => 'required|string|max:50',
             'experience_level' => 'required|string|max:50',
             'is_active' => 'required|boolean',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'required|string',
             'location' => 'required|string|max:255',
             'salary_min' => 'required|numeric',
