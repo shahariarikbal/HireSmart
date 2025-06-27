@@ -30,6 +30,16 @@ class AuthController extends Controller
         ]);
     }
 
+    public function profileUpdate(Request $request)
+    {
+        $user_profile_update = $this->authService->userProfileUpdate($request);
+        return response()->json([
+            'status' => 201,
+            'data' => $user_profile_update,
+            'message' => 'User profile has been updated'
+        ]);
+    }
+
     public function logout()
     {
         $this->authService->logout();

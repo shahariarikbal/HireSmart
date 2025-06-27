@@ -2,10 +2,18 @@
 
 namespace App\Services;
 
+use App\Repositories\UserRepository;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthService
 {
+    protected $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     public function attemptLogin($credentials)
     {
         return JWTAuth::attempt($credentials);
@@ -14,6 +22,11 @@ class AuthService
     public function getUser()
     {
         return JWTAuth::user();
+    }
+
+    public function userProfileUpdate($data)
+    {
+        return $this->userRepository->profileUpdate($data);
     }
 
     public function logout()
