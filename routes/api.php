@@ -16,6 +16,11 @@ Route::prefix('v1')->group(function (){
         // Logout route
         Route::post('/logout', [AuthController::class, 'logout']);
 
+        //User profile update
+        Route::prefix('user')->group(function(){
+            Route::put('/profile/update', [AuthController::class, 'profileUpdate']);
+        });
+
         // Employer Job listings route
         Route::prefix('/job')->middleware('role:employer')->group(function () {
             Route::get('/list', [JobListController::class, 'getJobList']);
