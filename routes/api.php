@@ -18,7 +18,7 @@ Route::prefix('v1')->group(function (){
 
         //User profile update
         Route::prefix('user')->group(function(){
-            Route::put('/profile/update', [AuthController::class, 'profileUpdate']);
+            Route::post('/profile/update', [AuthController::class, 'profileUpdate']);
         });
 
         // Employer Job listings route
