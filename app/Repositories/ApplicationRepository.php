@@ -5,13 +5,17 @@ namespace App\Repositories;
 use App\Models\Application;
 use App\Models\JobList;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ApplicationRepository
 {
     public function getAllJob()
     {
-        return JobList::with('user')->isActive()->latest()->paginate(20);
+        $jobs = Cache::remember('recent_job', now()->addMinutes(5), function(){
+            return JobList::with('user')->isActive()->latest()->paginate(20);
+        });
+        return $jobs;
     }
 
     public function filterJobs($filters = [])
