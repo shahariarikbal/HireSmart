@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\ApplicationController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\JobListController;
@@ -15,7 +16,7 @@ Route::prefix('v1')->group(function (){
         // Logout route
         Route::post('/logout', [AuthController::class, 'logout']);
 
-        //Job listings
+        // Employer Job listings route
         Route::prefix('/job')->middleware('role:employer')->group(function () {
             Route::get('/list', [JobListController::class, 'getJobList']);
             Route::post('/store', [JobListController::class, 'storeJob']);
@@ -30,6 +31,14 @@ Route::prefix('v1')->group(function (){
             Route::get('/list', [ApplicationController::class, 'getAllJobList']);
             Route::get('/filtering', [ApplicationController::class, 'jobFiltering']);
             Route::post('/apply/{id}', [ApplicationController::class, 'jobApply'])->middleware('throttle:5,1');
+        });
+
+
+        //Admin routes
+        Route::middleware('role:admin')->group(function(){
+            Route::get('/employer/lists', [AdminController::class, 'employerCountAndList']);
+            Route::get('/candidate/lists', [AdminController::class, 'candidateCountAndList']);
+            Route::get('/application/lists', [AdminController::class, 'applicationCountAndList']);
         });
         
     });
