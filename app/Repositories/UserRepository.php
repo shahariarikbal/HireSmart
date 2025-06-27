@@ -33,33 +33,33 @@ class UserRepository
 
         DB::beginTransaction();
         try {
-                $image = $this->imageService->updateImage(
-                    $data['image'] ?? null,
-                    'images/avatar',
-                    $user->avatar
-                );
+            $image = $this->imageService->updateImage(
+                $data['image'] ?? null,
+                'images/avatar',
+                $user->avatar
+            );
 
-                if ($user) {
-                    $user->update([
-                        'name' => trim($data['name']),
-                        'email' => trim($data['email']),
-                        'avatar' => $image
-                    ]);
+            if ($user) {
+                $user->update([
+                'name' => trim($data['name']),
+                'email' => isset($data['email']) && !empty(trim($data['email'])) ? trim($data['email']) : $user->email,
+                'avatar' => $image
+                ]);
 
-                    // update profiles table data insert
-                    UserProfile::updateOrCreate([
-                        'user_id' => $user->id
-                    ], [
-                        'preferred_location' => $data['preferred_location'],
-                        'expected_salary_min' => $data['expected_salary_min'],
-                        'expected_salary_max' => $data['expected_salary_max'],
-                    ]);
-                }
+                // update profiles table data insert
+                UserProfile::updateOrCreate([
+                'user_id' => $user->id
+                ], [
+                'preferred_location' => $data['preferred_location'],
+                'expected_salary_min' => $data['expected_salary_min'],
+                'expected_salary_max' => $data['expected_salary_max'],
+                ]);
+            }
 
-                DB::commit();
+            DB::commit();
             } catch (\Exception $e) {
-                DB::rollBack();
-                throw $e;
+            DB::rollBack();
+            throw $e;
         }
     }
 }
