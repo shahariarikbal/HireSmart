@@ -57,3 +57,64 @@ docker-compose exec web php artisan jwt:secret
 
 # 6. Run migrations and seeders
 docker-compose exec web php artisan migrate --seed
+
+
+📆 Background Jobs & Scheduling
+This project includes automated background tasks and scheduled jobs to enhance platform functionality and maintain data integrity.
+
+✅ Job Scheduling Features
+1. 🧠 Candidate-to-Job Matching
+Automatically runs in the background to match active candidates to suitable jobs based on:
+
+Required skills
+
+Location preference
+
+Salary range
+
+When a match is found, a notification is queued (can be logged or emailed)
+
+2. 🗃 Task: Archive Old Job Posts
+Automatically archives job listings older than 30 days
+
+Runs daily using Laravel's scheduler
+
+3. 🚫 Task: Remove Unverified Users
+Automatically deletes users who haven't verified their email
+
+Runs weekly
+
+⚙️ How It Works
+Laravel’s queue:work is used for background job processing
+
+Laravel’s schedule:run is used for time-based task scheduling
+
+🧪 How to Run Background Jobs in Docker
+Start the queue worker:
+
+
+docker-compose exec web php artisan queue:work
+Run scheduled tasks manually (for testing):
+
+
+docker-compose exec web php artisan schedule:run
+✅ In production, you'll use a cron job that runs php artisan schedule:run every minute (as Laravel recommends).
+
+✉️ Notification Delivery (Mocked or Real)
+You can configure Laravel to:
+
+Log notifications (default for dev)
+
+Send real emails (Mailtrap, SMTP, etc.)
+
+Update the .env file for email delivery:
+
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=your_username
+MAIL_PASSWORD=your_password
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS=no-reply@hiresmart.com
+MAIL_FROM_NAME="${APP_NAME}"
